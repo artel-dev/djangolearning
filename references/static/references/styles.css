@@ -1,3 +1,233 @@
+html,
 body {
-    padding: 10px;
+    font-family: sans-serif;
+    font-size: 16px;
+    height: 100%;
 }
+
+html,
+body,
+ul,
+li,
+div {
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    height: calc(100% - 3.5em);
+    width: 100%;
+}
+
+
+/* HEADER COMPONENT */
+
+.header-component {
+    display: flex;
+    justify-content: space-between;
+    height: 3.5em;
+    align-items: center;
+    background-color: #233544;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.header-component .header-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.header-component .header-content .control-content {
+    display: flex;
+    align-items: center;
+    min-width: 14em;
+    width: 14em;
+    justify-content: center;
+}
+
+.header-component .header-content .control-content .button {
+    font-size: 2em;
+}
+
+.header-component .header-content .control-content .title {
+    font-size: 1.5em;
+    margin-left: 1em;
+}
+
+.menu-component {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-component .menu-item {
+    padding: 1em;
+    cursor: pointer;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.menu-component .menu-item:hover {
+    background-color: #1f3140;
+}
+
+
+/* ===== */
+
+
+/* USER COMPONENT */
+
+.user-component {
+    margin-right: 1em;
+}
+
+.user-component .user-content {
+    display: flex;
+    align-items: center;
+}
+
+.user-component .user-content .user-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 6em;
+}
+
+.user-component .user-content .user-buttons .button {
+    margin: 0 0.5em;
+    cursor: pointer;
+}
+
+.user-component .user-content .company {
+    margin: 0 2em;
+    font-size: 1.2em;
+}
+
+.user-component .user-content .user-block {
+    display: flex;
+    align-items: center;
+}
+
+.user-component .user-content .user-block .image {}
+
+.user-component .user-content .user-block .name {
+    margin-left: 1em;
+}
+
+
+/* ===== */
+
+
+/* SIDEBAR COMPONENT */
+
+.sidebar-component {
+    background-color: #010001;
+    width: 14em;
+    min-width: 14em;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebar-component .sidebar-content {}
+
+.sidebar-component .sidebar-content .sidebar-item {
+    display: flex;
+    color: white;
+    width: 100%;
+    padding: 0.8em 1em;
+    box-sizing: border-box;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebar-component .sidebar-content .sidebar-item .icon {
+    margin-right: 0.5em;
+    padding: 0.2em;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:hover {
+    background-color: #5989aa;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(1) .icon {
+    background-color: #d3778a;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(2) .icon {
+    background-color: #cbbb7a;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(3) .icon {
+    background-color: #608f73;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(4) .icon {
+    background-color: #608f73;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(5) .icon {
+    background-color: #1e8493;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(6) .icon {
+    background-color: #777aa0;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(7) .icon {
+    background-color: #e09362;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(8) .icon {
+    background-color: #e09362;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(9) .icon {
+    background-color: #777aa0;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(10) .icon {
+    background-color: #ae615a;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(11) .icon {
+    background-color: #e09362;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(12) .icon {
+    background-color: #ae615a;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(13) .icon {
+    background-color: #6a686a;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(14) .icon {
+    background-color: #86afc9;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(15) .icon {
+    background-color: #1e8493;
+}
+
+.sidebar-component .sidebar-content .sidebar-item:nth-child(16) .icon {
+    background-color: #86afc9;
+}
+
+.sidebar-component .sidebar-content .sidebar-item .name {}
+
+
+/* ===== */
+
+
+/* CONTENT COMPONENT */
+
+.content-component {
+    width: 100%;
+    height: 1px;
+}
+
+
+/* ===== */
