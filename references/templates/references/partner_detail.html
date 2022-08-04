@@ -1,4 +1,12 @@
-{% extends "references/layout.html" %}
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Partner
+{% endblock %}
+
+{% block page_header %}
+Partner detail
+{% endblock %}
 
 {% block action %}
     <ul class="nav">
@@ -11,7 +19,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Partner details</h2>
+
     <p>{{ object.name }} - {{ object.description }}</p>
 
     <form method="post">
