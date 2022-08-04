@@ -1,0 +1,53 @@
+{% extends "sale/sale_layout.html" %}
+
+{% block page_title %}Sale invoices{% endblock %}
+
+{% block page_header %}
+Sale invoice list
+{% endblock %}
+
+{% block action %}
+    <ul class="nav">
+        {% for action in actions %}
+        <li class="nav-item"><a class="nav-link" href="{% url action.name %}">{{ action.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Number</th>
+                <th>Company</th>
+                <th>Partner</th>
+                <th>Warehouse</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.date }}</td>
+                <td><a href="{% url 'sale-invoice-detail' object.pk %}">{{ object.number }}</a></td>
+                <td>company</td>
+                <td>{{ object.partner }}</td>
+                <td>warehouse</td>
+                <td>{{ object.user }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>-</td>
+                <td>No data yet.</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
