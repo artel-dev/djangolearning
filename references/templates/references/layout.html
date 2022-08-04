@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}References{% endblock %}</title>
+    <title>{% block page_title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{% static 'references/styles.css' %}" rel="stylesheet">
@@ -18,16 +18,17 @@
 
         <div class="header-content">
             <div class="control-content">
-                <i class="material-icons button">list</i>
-                <div class="title">iT.Artel</div>
+                <i class="material-icons button">apps</i>
+                <div class="title">{% block title %}{% endblock %}</div>
             </div>
             <ul class="menu-component">
-                <li class="menu-item">Dashboard</li>
-                <li class="menu-item">Customers</li>
-                <li class="menu-item">Vendors</li>
-                <li class="menu-item">Accounting</li>
-                <li class="menu-item">Reporing</li>
-                <li class="menu-item">Configuration</li>
+                {% block menu %}{% endblock %}
+<!--                <li class="menu-item">Dashboard</li>-->
+<!--                <li class="menu-item">Customers</li>-->
+<!--                <li class="menu-item">Vendors</li>-->
+<!--                <li class="menu-item">Accounting</li>-->
+<!--                <li class="menu-item">Reporing</li>-->
+<!--                <li class="menu-item">Configuration</li>-->
             </ul>
         </div>
 
@@ -43,7 +44,26 @@
                 <div class="company">iT.Artel</div>
                 <div class="user-block">
                     <i class="material-icons image">account_circle</i>
-                    <div class="name">Useren User Userius</div>
+                    {% if user.is_authenticated %}
+                    <div class="name">{{ user.username }}</div>
+                    {% else %}
+                    <div class="name">Not signed in.</div>
+                    {% endif %}
+
+                    <ul class="menu-component">
+                        {% if user.is_authenticated %}
+                        <li class="menu-item">
+                            <a href="{% url 'logout' %}">Log Out</a>
+                        </li>
+                        {% else %}
+                        <li class="menu-item">
+                            <a href="{% url 'login' %}">Log In</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{% url 'register' %}">Register</a>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
 
@@ -58,69 +78,81 @@
 
             <ul class="sidebar-content">
                 <li class="sidebar-item">
-                    <i class="material-icons icon">chat</i>
-                    <div class="name">Discuss</div>
+                    <i class="material-icons icon">category</i>
+                    <div class="name">
+                        <a href="{% url 'index' %}">References</a>
+                    </div>
                 </li>
                 <li class="sidebar-item">
-                    <i class="material-icons icon">calendar_month</i>
-                    <div class="name">Calendar</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">cloud</i>
-                    <div class="name">Real Estate</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">cloud</i>
-                    <div class="name">Quest</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">portrait</i>
-                    <div class="name">Contacts</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">handshake</i>
-                    <div class="name">CRM</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">trending_up</i>
-                    <div class="name">Sales</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">request_page</i>
-                    <div class="name">Invoicing</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">extension</i>
-                    <div class="name">Project</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">schedule</i>
-                    <div class="name">Timesheets</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">public</i>
-                    <div class="name">Website</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">cast_for_education</i>
-                    <div class="name">eLearning</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">send</i>
-                    <div class="name">Email Marketing</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">phone_iphone</i>
-                    <div class="name">SMS Marketing</div>
-                </li>
-                <li class="sidebar-item">
-                    <i class="material-icons icon">confirmation_number</i>
-                    <div class="name">Events</div>
+                    <i class="material-icons icon">inventory</i>
+                    <div class="name">Inventory</div>
                 </li>
                 <li class="sidebar-item">
                     <i class="material-icons icon">credit_card</i>
                     <div class="name">Purchase</div>
                 </li>
+                <li class="sidebar-item">
+                    <i class="material-icons icon">trending_up</i>
+                    <div class="name">
+                        <a href="{% url 'sale-index' %}">Sales</a>
+                    </div>
+                </li>
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">chat</i>-->
+<!--                    <div class="name">Discuss</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">calendar_month</i>-->
+<!--                    <div class="name">Calendar</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">cloud</i>-->
+<!--                    <div class="name">Real Estate</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">cloud</i>-->
+<!--                    <div class="name">Quest</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">portrait</i>-->
+<!--                    <div class="name">Contacts</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">handshake</i>-->
+<!--                    <div class="name">CRM</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">request_page</i>-->
+<!--                    <div class="name">Invoicing</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">extension</i>-->
+<!--                    <div class="name">Project</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">schedule</i>-->
+<!--                    <div class="name">Timesheets</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">public</i>-->
+<!--                    <div class="name">Website</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">cast_for_education</i>-->
+<!--                    <div class="name">eLearning</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">send</i>-->
+<!--                    <div class="name">Email Marketing</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">phone_iphone</i>-->
+<!--                    <div class="name">SMS Marketing</div>-->
+<!--                </li>-->
+<!--                <li class="sidebar-item">-->
+<!--                    <i class="material-icons icon">confirmation_number</i>-->
+<!--                    <div class="name">Events</div>-->
+<!--                </li>-->
             </ul>
 
         </div>
@@ -128,32 +160,11 @@
         <!-- CONTENT COMPONENT -->
         <div class="content-component">
 
-            <h1>References</h1>
-            <div>
-                {% if user.is_authenticated %} Signed in as <strong>{{ user.username }}</strong>. {% else %} Not signed in. {% endif %}
-            </div>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'index' %}">References</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-list' %}">Users</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                {% endif %}
-            </ul>
-            <hr> {% block action %} {% endblock %}
-            <hr> {% block body %} {% endblock %}
+            <h2>{% block page_header %}{% endblock %}</h2>
+            <hr>
+            {% block action %} {% endblock %}
+            <hr>
+            {% block body %} {% endblock %}
 
         </div>
         <!-- ===== -->

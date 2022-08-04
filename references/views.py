@@ -7,14 +7,23 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import User, Partner
+from .models import User, Product, Partner
 
 
-# Create your views here.
+reference_menu = [
+    {"name": "user-list", "title": "Users"},
+    {"name": "", "title": "Companies"},
+    {"name": "", "title": "Partners"},
+    {"name": "", "title": "Warehouses"},
+    {"name": "product-list", "title": "Products"},
+]
 
 
 def index(request):
-    return render(request, "references/index.html")
+    context = {
+        "menu": reference_menu,
+    }
+    return render(request, "references/index.html", context)
 
 
 def login_view(request):
@@ -79,6 +88,7 @@ class UserListView(ListView):
             {'name': 'user-create', 'title': 'create'},
         ]
         context["actions"] = actions
+        context["menu"] = reference_menu
         return context
 
 
@@ -92,6 +102,11 @@ class UserCreateView(CreateView):
     template_name = "references/user_detail.html"
     success_url = reverse_lazy('user-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
 
 class UserUpdateView(UpdateView):
     model = User
@@ -103,11 +118,21 @@ class UserUpdateView(UpdateView):
     template_name = "references/user_detail.html"
     success_url = reverse_lazy('user-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
 
 class UserDeleteView(DeleteView):
     model = User
     template_name = "references/user_confirm_delete.html"
     success_url = reverse_lazy('user-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
 
 
 class UserDetailView(DetailView):
@@ -122,6 +147,78 @@ class UserDetailView(DetailView):
             {'name': 'user-delete', 'title': 'delete'},
         ]
         context["actions"] = actions
+        context["menu"] = reference_menu
+        return context
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = "references/product_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'product-create', 'title': 'create'},
+        ]
+        context["actions"] = actions
+        context["menu"] = reference_menu
+        return context
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = [
+        "name",
+        "description",
+    ]
+    template_name = "references/product_detail.html"
+    success_url = reverse_lazy('product-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = [
+        "name",
+        "description",
+    ]
+    template_name = "references/product_detail.html"
+    success_url = reverse_lazy('product-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = "references/product_confirm_delete.html"
+    success_url = reverse_lazy('product-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "references/product_detail.html"
+    success_url = reverse_lazy('product-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'product-update', 'title': 'edit'},
+            {'name': 'product-delete', 'title': 'delete'},
+        ]
+        context["actions"] = actions
+        context["menu"] = reference_menu
         return context
 
 

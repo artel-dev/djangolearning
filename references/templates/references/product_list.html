@@ -1,11 +1,11 @@
 {% extends "references/reference_layout.html" %}
 
 {% block page_title %}
-Users
+Products
 {% endblock %}
 
 {% block page_header %}
-User list
+Product list
 {% endblock %}
 
 {% block action %}
@@ -22,16 +22,14 @@ User list
         <thead>
             <tr>
                 <th>Name</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
             {% for object in object_list %}
             <tr>
                 <td><a href="{% url 'product-detail' object.pk %}">{{ object.name }}</a></td>
-                <td>{{ object.first_name }}</td>
-                <td>{{ object.last_name }}</td>
+                <td>{{ object.description }}</td>
             </tr>
             {% empty %}
             <tr>

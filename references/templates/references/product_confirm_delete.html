@@ -1,16 +1,16 @@
 {% extends "references/reference_layout.html" %}
 
 {% block page_title %}
-User delete
+Product delete
 {% endblock %}
 
 {% block page_header %}
-User delete
+Product delete confirmation
 {% endblock %}
 
 {% block body %}
 
-    <p>{{ object.name }} - {{ object.first_name }} {{ object.last_name }}</p>
+    <p>{{ object.name }} - {{ object.description }}</p>
 
     <form method="post">
         {% csrf_token %}
