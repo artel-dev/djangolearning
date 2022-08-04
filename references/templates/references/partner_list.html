@@ -1,16 +1,24 @@
-{% extends "references/layout.html" %}
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Partners
+{% endblock %}
+
+{% block page_header %}
+Partner list
+{% endblock %}
 
 {% block action %}
     <ul class="nav">
         {% for action in actions %}
-        <li class="nav-item"><a class="nav-link" href="{% url action.name %}">{{ action.title }}</a></li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url action.name %}">{{ action.title }}</a>
+        </li>
         {% endfor %}
     </ul>
 {% endblock %}
 
 {% block body %}
-    <h2>Partners</h2>
-
     <ul>
       {% for object in object_list %}
         <li><a href="{% url 'partner-detail' object.pk %}">{{ object.name }} - {{ object.description }}</a></li>

@@ -13,7 +13,7 @@ from .models import User, Product, Partner
 reference_menu = [
     {"name": "user-list", "title": "Users"},
     {"name": "", "title": "Companies"},
-    {"name": "", "title": "Partners"},
+    {"name": "partner-list", "title": "Partners"},
     {"name": "", "title": "Warehouses"},
     {"name": "product-list", "title": "Products"},
 ]
@@ -232,6 +232,7 @@ class PartnerListView(ListView):
             {'name': 'partner-create', 'title': 'create'},
         ]
         context["actions"] = actions
+        context["menu"] = reference_menu
         return context
 
 
@@ -244,6 +245,11 @@ class PartnerCreateView(CreateView):
     template_name = "references/partner_detail.html"
     success_url = reverse_lazy('partner-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
 
 class PartnerUpdateView(UpdateView):
     model = Partner
@@ -254,11 +260,21 @@ class PartnerUpdateView(UpdateView):
     template_name = "references/partner_detail.html"
     success_url = reverse_lazy('partner-list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
 
 class PartnerDeleteView(DeleteView):
     model = Partner
     template_name = "references/partner_confirm_delete.html"
     success_url = reverse_lazy('partner-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
 
 
 class PartnerDetailView(DetailView):
@@ -273,4 +289,5 @@ class PartnerDetailView(DetailView):
             {'name': 'partner-delete', 'title': 'delete'},
         ]
         context["actions"] = actions
+        context["menu"] = reference_menu
         return context
