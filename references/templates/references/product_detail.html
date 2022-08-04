@@ -1,0 +1,30 @@
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Product
+{% endblock %}
+
+{% block page_header %}
+Product detail
+{% endblock %}
+
+{% block action %}
+    <ul class="nav">
+        {% for action in actions %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url action.name object.pk %}">{{ action.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <p>{{ object.name }} - {{ object.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-danger" type="submit" value="Save">
+    </form>
+
+{% endblock %}

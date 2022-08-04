@@ -1,0 +1,45 @@
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Users
+{% endblock %}
+
+{% block page_header %}
+User list
+{% endblock %}
+
+{% block action %}
+    <ul class="nav">
+        {% for action in actions %}
+        <li class="nav-item"><a class="nav-link" href="{% url action.name %}">{{ action.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td><a href="{% url 'product-detail' object.pk %}">{{ object.name }}</a></td>
+                <td>{{ object.first_name }}</td>
+                <td>{{ object.last_name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>No data yet.</td>
+                <td>-</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

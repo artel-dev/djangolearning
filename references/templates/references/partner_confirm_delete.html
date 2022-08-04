@@ -1,0 +1,14 @@
+{% extends "references/layout.html" %}
+
+{% block body %}
+
+    <h2>Partner delete confirmation</h2>
+    <p>{{ object.name }} - {{ object.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete this partner"?</p>
+        <input type="submit" value="Confirm">
+    </form>
+
+{% endblock %}

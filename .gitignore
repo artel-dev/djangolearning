@@ -1,1 +1,12 @@
-/db.sqlite3
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+# PyCharm #
+/.idea
+/references/migrations/
+/sale/migrations/

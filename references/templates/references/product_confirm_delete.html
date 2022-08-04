@@ -1,0 +1,21 @@
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Product delete
+{% endblock %}
+
+{% block page_header %}
+Product delete confirmation
+{% endblock %}
+
+{% block body %}
+
+    <p>{{ object.name }} - {{ object.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm">
+    </form>
+
+{% endblock %}

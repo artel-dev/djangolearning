@@ -1,0 +1,15 @@
+{% extends "references/layout.html" %}
+
+{% block title %}References{% endblock %}
+
+{% block menu %}
+    {% for menu_item in menu %}
+    <li class="menu-item">
+        {% if menu_item.name %}
+        <a href="{% url menu_item.name %}">{{ menu_item.title }}</a>
+        {% else %}
+        {{ menu_item.title }}
+        {% endif %}
+    </li>
+    {% endfor %}
+{% endblock %}
