@@ -29,7 +29,7 @@ User list
         <tbody>
             {% for object in object_list %}
             <tr>
-                <td><a href="{% url 'product-detail' object.pk %}">{{ object.name }}</a></td>
+                <td><a href="{% url 'user-detail' object.pk %}">{{ object.name }}</a></td>
                 <td>{{ object.first_name }}</td>
                 <td>{{ object.last_name }}</td>
             </tr>
