@@ -10,3 +10,5 @@ media
 /.idea
 /references/migrations/
 /sale/migrations/
+/inventory/migrations/
+/purchase/migrations/
