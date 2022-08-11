@@ -1,0 +1,29 @@
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Companies
+{% endblock %}
+
+{% block page_header %}
+Company list
+{% endblock %}
+
+{% block action %}
+    <ul class="nav">
+        {% for action in actions %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url action.name %}">{{ action.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <ul>
+      {% for object in object_list %}
+        <li><a href="{% url 'company-detail' object.pk %}">{{ object.name }} - {{ object.description }}</a></li>
+      {% empty %}
+        <li>No data yet.</li>
+      {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "references/reference_layout.html" %}
+
+{% block page_title %}
+Company delete
+{% endblock %}
+
+{% block page_header %}
+Company delete confirmation
+{% endblock %}
+
+{% block body %}
+
+    <p>{{ object.name }} - {{ object.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete this company"?</p>
+        <input type="submit" value="Confirm">
+    </form>
+
+{% endblock %}
