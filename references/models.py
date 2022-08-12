@@ -24,3 +24,9 @@ class Product(models.Model):
 class Partner(models.Model):
     name = models.CharField(max_length=150, default='')
     description = models.CharField(max_length=500)
+
+class Company(models.Model):
+    name = models.CharField(max_length=150)
+    description = models.CharField(max_length=500)
+    def __str__(self):
+        return f"{self.name} ({self.description})"

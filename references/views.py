@@ -7,12 +7,12 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import User, Product, Partner
+from .models import User, Product, Partner, Company
 
 
 reference_menu = [
     {"name": "user-list", "title": "Users"},
-    {"name": "", "title": "Companies"},
+    {"name": "company-list", "title": "Companies"},
     {"name": "partner-list", "title": "Partners"},
     {"name": "", "title": "Warehouses"},
     {"name": "product-list", "title": "Products"},
@@ -287,6 +287,72 @@ class PartnerDetailView(DetailView):
         actions = [
             {'name': 'partner-update', 'title': 'edit'},
             {'name': 'partner-delete', 'title': 'delete'},
+        ]
+        context["actions"] = actions
+        context["menu"] = reference_menu
+        return context
+
+class CompanyListView(ListView):
+    model = Company
+    template_name = "references/company_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'company-create', 'title': 'create'},
+        ]
+        context["actions"] = actions
+        context["menu"] = reference_menu
+        return context
+
+class CompanyCreateView(CreateView):
+    model = Company
+    fields = [
+        "name",
+        "description"
+    ]
+    template_name = "references/company_detail.html"
+    success_url = reverse_lazy('company-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+class CompanyUpdateView(UpdateView):
+    model = Company
+    fields = [
+        "name",
+        "description"
+    ]
+    template_name = "references/company_detail.html"
+    success_url = reverse_lazy('company-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+class CompanyDeleteView(DeleteView):
+    model = Company
+    template_name = "references/company_confirm_delete.html"
+    success_url = reverse_lazy('company-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = reference_menu
+        return context
+
+class CompanyDetailView(DetailView):
+    model = Company
+    template_name = "references/company_detail.html"
+    success_url = reverse_lazy('company-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'company-update', 'title': 'edit'},
+            {'name': 'company-delete', 'title': 'delete'},
         ]
         context["actions"] = actions
         context["menu"] = reference_menu
