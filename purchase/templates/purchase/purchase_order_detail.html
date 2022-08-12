@@ -1,0 +1,46 @@
+{% extends "purchase/purchase_layout.html" %}
+
+{% block page_title %}Purchase order{% endblock %}
+
+{% block page_header %}
+Purchase order detail
+{% endblock %}
+
+{% block body %}
+
+    <p>{{ object.date }} - {{ object.number }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            {{ form }}
+        </table>
+        <table class="table table-bordered">
+            {{ sale_invoice_formset.management_form }}
+            {% for line_form in sale_invoice_formset %}
+            {% if forloop.first %}
+            <thead>
+                {% for field in line_form.visible_fields %}
+                <th>{{ field.label }}</th>
+                {% endfor %}
+            </thead>
+            {% endif %}
+            <tr>
+                {% for field in line_form.visible_fields %}
+                <td>
+                    {% if forloop.first %}
+                    {% for hidden_field in line_form.hidden_fields %}
+                    {{ hidden_field }}
+                    {% endfor %}
+                    {% endif %}
+                    {{ field.errors.as_ul }}
+                    {{ field }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <input class="btn btn-danger" type="submit" value="Save">
+    </form>
+
+{% endblock %}
