@@ -8,7 +8,7 @@ class PurchaseOrder(models.Model):
     # company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name="purchase_order")
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE, null=True, default=None, related_name="purchase_order")
     # warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name="purchase_order")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchase_order")
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="purchase_order")
 
     def __str__(self):
         return f"Purchase Order {self.number} ({self.date})"
