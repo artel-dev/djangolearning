@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'references',
     'sale',
     'purchase',
+    'inventory',
     "django_tables2",
 ]
 

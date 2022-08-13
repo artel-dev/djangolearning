@@ -1,0 +1,19 @@
+{% extends "inventory/inventory_layout.html" %}
+
+{% block page_title %}Pick delete{% endblock %}
+
+{% block page_header %}
+Pick delete confirmation
+{% endblock %}
+
+{% block body %}
+
+    <p>{{ object.date }} - {{ object.number }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form>
+
+{% endblock %}

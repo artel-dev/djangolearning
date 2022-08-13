@@ -21,4 +21,9 @@ urlpatterns = [
     path("partner/update/<int:pk>", views.PartnerUpdateView.as_view(), name="partner-update"),
     path("partner/delete/<int:pk>", views.PartnerDeleteView.as_view(), name="partner-delete"),
     path("partner/<int:pk>", views.PartnerDetailView.as_view(), name="partner-detail"),
+    path("company", views.CompanyListView.as_view(), name="company-list"),
+    path("company/create", views.CompanyCreateView.as_view(), name="company-create"),
+    path("company/update/<int:pk>", views.CompanyUpdateView.as_view(), name="company-update"),
+    path("company/delete/<int:pk>", views.CompanyDeleteView.as_view(), name="company-delete"),
+    path("company/<int:pk>", views.CompanyDetailView.as_view(), name="company-detail"),
 ]
