@@ -7,13 +7,13 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import PickAndPack
-from .forms import pick_and_pack_formset
+from .models import PickAndPack, Receive
+from .forms import pick_and_pack_formset, receive_formset
 
 
 inventory_menu = [
     {"name": "", "title": "Transfer"},
-    {"name": "", "title": "Receive"},
+    {"name": "receive-list", "title": "Receive"},
     {"name": "", "title": "Putaway"},
     {"name": "pick-list", "title": "Pick and pack"},
 ]
@@ -25,6 +25,112 @@ def inventory_index(request):
     }
     return render(request, "inventory/inventory_index.html", context)
 
+class ReceiveListView(ListView):
+    model = Receive
+    template_name = "inventory/receive_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'receive-create', 'title': 'create'},
+        ]
+        context["menu"] = inventory_menu
+        context["actions"] = actions
+        return context
+
+class ReceiveCreateView(CreateView):
+    model = Receive
+    fields = '__all__'
+    template_name = "inventory/receive_detail.html"
+    success_url = reverse_lazy('receive-list')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = inventory_menu
+        if self.request.POST:
+            context["receive_formset"] = receive_formset(self.request.POST)
+        else:
+            context["receive_formset"] = receive_formset(queryset=Receive.objects.none())
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        formset = receive_formset(request.POST)
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
+        else:
+            return self.render_to_response(self.get_context_data())
+
+    def form_valid(self, form, formset):
+        self.object = form.save()
+        formset.instance = self.object
+        formset.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, formset):
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+class ReceiveDetailView(DetailView):
+    model = Receive
+    template_name = "inventory/receive_detail.html"
+    success_url = reverse_lazy('receive-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        actions = [
+            {'name': 'receive-update', 'title': 'edit'},
+            {'name': 'receive-delete', 'title': 'delete'},
+        ]
+        context["menu"] = inventory_menu
+        context["actions"] = actions
+        return context
+
+class ReceiveUpdateView(UpdateView):
+    model = Receive
+    fields = '__all__'
+    template_name = "inventory/receive_detail.html"
+    success_url = reverse_lazy('receive-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = inventory_menu
+        if self.request.POST:
+            context["receive_formset"] = receive_formset(self.request.POST, instance=self.get_object())
+        else:
+            context["receive_formset"] = receive_formset(instance=self.get_object())
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        formset = receive_formset(request.POST, instance=self.get_object())
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
+        else:
+            return self.render_to_response(self.get_context_data())
+
+    def form_valid(self, form, formset):
+        self.object = form.save()
+        formset.instance = self.object
+        formset.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, formset):
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+
+class ReceiveDeleteView(DeleteView):
+    model = Receive
+    template_name = "inventory/receive_confirm_delete.html"
+    success_url = reverse_lazy('receive-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu"] = inventory_menu
+        return context
 
 class PickAndPackListView(ListView):
     model = PickAndPack

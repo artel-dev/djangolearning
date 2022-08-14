@@ -12,3 +12,4 @@ media
 /sale/migrations/
 /inventory/migrations/
 /purchase/migrations/
+.vscode/launch.json
